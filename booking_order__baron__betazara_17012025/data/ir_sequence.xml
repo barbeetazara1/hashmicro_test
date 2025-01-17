@@ -1,0 +1,12 @@
+<odoo>
+    <data noupdate="1">
+        <record id="sequence_work_orde" model="ir.sequence">
+            <field name="name">Work Order Seq</field>
+            <field name="code">work.order.sequence</field>
+            <field name="prefix">WO</field>
+            <field eval="1" name="number_next"/>
+            <field eval="1" name="number_increment"/>
+            <field name="padding">4</field>
+        </record>
+    </data>
+</odoo>

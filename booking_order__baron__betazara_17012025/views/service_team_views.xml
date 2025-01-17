@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <data>
+    <!-- List View -->
+    <record model="ir.ui.view" id="service_team_tree">
+      <field name="name">service.team.tree</field>
+      <field name="model">service.team</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="team_leader"/>
+          <field name="team_members" widget="many2many_tags"/>
+        </tree>
+      </field>
+    </record>
+    
+    <!-- Form View -->
+    <record model="ir.ui.view" id="service_team_form">
+      <field name="name">service.team.form</field>
+      <field name="model">service.team</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="team_leader"/>
+              </group>
+              <group>
+                <field name="team_members" widget="many2many_tags"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="service_team_action">
+      <field name="name">Service Team</field>
+      <field name="res_model">service.team</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem 
+      id="menu_service_team"
+      name="Service Team"
+      parent="booking_menu_root"
+      sequence="3"
+      action="service_team_action"
+    />
+
+  </data>
+</odoo>

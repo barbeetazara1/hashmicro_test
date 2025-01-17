@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="inherit_sale_order" model="ir.ui.view">
+            <field name="name">inherit.sale.order</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="booking_start" required="1"/>
+                    <field name="booking_end" required="1"/>
+                    <field name="teams_id" required="1"/>
+                    <field name="team_leader" required="1" force_save="1"/>
+                    <field name="team_members" widget="many2many_tags" required="1" force_save="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_confirm'][2]" position="after">
+                    <button name="button_check" string="Check" type="object"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_invoice']" position="after">
+                    <button class="oe_stat_button" type="object" name="open_working_order" icon="fa-book">
+                        <field name="working_count" widget="statinfo" string="Work Order"/>
+                    </button>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="booking_order_aciton" model="ir.actions.act_window">
+            <field name="name">Booking Order</field>
+            <field name="res_model">sale.order</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_booking', '=', True)]</field>
+        </record>
+
+        <menuitem
+            id="booking_menu_root"
+            name="Booking"
+            parent="sale.sale_menu_root"
+            sequence="99"
+        />
+
+        <menuitem
+            id="booking_order_menu"
+            name="Booking Order"
+            parent="booking_menu_root"
+            sequence="1"
+            action="booking_order_aciton"
+        />
+    </data>
+</odoo>
